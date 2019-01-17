@@ -9,3 +9,6 @@ def test_bool_returns_BooleanField():
 
 def test_str_returns_CharField():
     assert isinstance(field_for_type(str), fields.CharField)
+
+def test_float_returns_FloatField():
+    assert isinstance(field_for_type(float), fields.FloatField)

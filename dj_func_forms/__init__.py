@@ -13,6 +13,8 @@ def field_for_type(type):
         return fields.BooleanField()
     elif type == str:
         return fields.CharField()
+    elif type == float:
+        return fields.FloatField()
 
 
 def field_for_param(param):
