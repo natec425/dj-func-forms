@@ -9,8 +9,10 @@ import inspect
 def field_for_type(type):
     if type == int:
         return fields.IntegerField()
-    if type == bool:
+    elif type == bool:
         return fields.BooleanField()
+    elif type == str:
+        return fields.CharField()
 
 
 def field_for_param(param):
