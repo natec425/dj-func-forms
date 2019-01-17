@@ -1,5 +1,11 @@
 # dj_func_forms
 
+> This is totally for funsies.
+>
+> I just had the idea and wanted to build a thing =).
+>
+> -Nate
+
 `FuncForm` allows you to specify a function as a class attribute,
     and it will infer fields from the function parameters.
 
