@@ -16,3 +16,6 @@ def test_float_returns_FloatField():
 
 def test_date_returns_DateField():
     assert isinstance(field_for_type(date), fields.DateField)
+
+def test_datetime_returns_DateTimeField():
+    assert isinstance(field_for_type(datetime), fields.DateTimeField)
