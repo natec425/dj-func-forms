@@ -24,6 +24,19 @@ def field_for_param(param):
 
 
 class FuncForm(BaseForm):
+    '''FuncForm allows you to specify a function as a class attribute,
+    and it will infer fields from the function parameters.
+
+    If the parameter:
+        - doesn't have an annotation, it will infer CharField.
+        - has a Field as an annotation, the annotation field will be used.
+        - has a simple builtin type as an annotation,
+          it will infer the simple corresponding field
+              int -> IntegerField
+              bool -> BooleanField
+              etc...
+    '''
+
     def __init_subclass__(cls):
         params = inspect.signature(cls.function).parameters.values()
         cls.base_fields = cls.declared_fields = []
