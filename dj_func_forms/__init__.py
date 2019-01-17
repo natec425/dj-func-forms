@@ -1,6 +1,7 @@
 from django.forms import BaseForm, Field
 from django.forms import fields
 from django.forms.widgets import MediaDefiningClass
+from collections import OrderedDict
 
 import inspect
 
@@ -39,10 +40,10 @@ class FuncForm(BaseForm):
 
     def __init_subclass__(cls):
         params = inspect.signature(cls.function).parameters.values()
-        cls.base_fields = cls.declared_fields = []
+        cls.base_fields = cls.declared_fields = OrderedDict()
         for param in params:
             field = field_for_param(param)
-            cls.base_fields.append(field)
+            cls.base_fields[param.name] = field
             setattr(cls, param.name, field)
 
     def return_value(self):
