@@ -2,6 +2,7 @@ from django.forms import BaseForm, Field
 from django.forms import fields
 from django.forms.widgets import MediaDefiningClass
 from collections import OrderedDict
+from datetime import date
 
 import inspect
 
@@ -15,6 +16,8 @@ def field_for_type(type):
         return fields.CharField()
     elif type == float:
         return fields.FloatField()
+    elif type == date:
+        return fields.DateField()
 
 
 def field_for_param(param):
