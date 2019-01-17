@@ -6,20 +6,14 @@ from datetime import date, datetime
 
 import inspect
 
-
-def field_for_type(type):
-    if type == int:
-        return fields.IntegerField()
-    elif type == bool:
-        return fields.BooleanField()
-    elif type == str:
-        return fields.CharField()
-    elif type == float:
-        return fields.FloatField()
-    elif type == date:
-        return fields.DateField()
-    elif type == datetime:
-        return fields.DateTimeField()
+INFERRED_BUILTIN_TYPES = {
+    int: fields.IntegerField,
+    bool: fields.BooleanField,
+    str: fields.CharField,
+    float: fields.FloatField,
+    date: fields.DateField,
+    datetime: fields.DateTimeField,
+}
 
 
 def field_for_param(param):
@@ -27,8 +21,8 @@ def field_for_param(param):
         return fields.CharField()
     elif isinstance(param.annotation, Field):
         return param.annotation
-    elif isinstance(param.annotation, type):
-        return field_for_type(param.annotation)
+    elif param.annotation in INFERRED_BUILTIN_TYPES:
+        return INFERRED_BUILTIN_TYPES[param.annotation]()
 
     return CharField()
 
