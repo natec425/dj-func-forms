@@ -1,5 +1,5 @@
 from dj_func_forms import FuncForm
-from django.forms import CharField, IntegerField
+from django.forms import CharField, IntegerField, BooleanField
 from django.conf import settings
 
 
@@ -23,3 +23,14 @@ def test_FuncForm_will_use_Field_parameter_annotations():
 
     assert isinstance(AddForm.x, IntegerField)
     assert isinstance(AddForm.y, IntegerField)
+
+
+def test_FuncForm_infers_field_for_python_builtin_types():
+    def add(x: int, y: bool):
+        return x + y
+
+    class AddForm(FuncForm):
+        function = add
+
+    assert isinstance(AddForm.x, IntegerField)
+    assert isinstance(AddForm.y, BooleanField)

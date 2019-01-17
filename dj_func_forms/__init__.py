@@ -1,4 +1,5 @@
-from django.forms import BaseForm, CharField, Field, IntegerField
+from django.forms import BaseForm, Field
+from django.forms import fields
 from django.forms.widgets import MediaDefiningClass
 
 import inspect
@@ -6,12 +7,14 @@ import inspect
 
 def field_for_type(type):
     if type == int:
-        return IntegerField()
+        return fields.IntegerField()
+    if type == bool:
+        return fields.BooleanField()
 
 
 def field_for_param(param):
     if param.annotation == inspect.Signature.empty:
-        return CharField()
+        return fields.CharField()
     elif isinstance(param.annotation, Field):
         return param.annotation
     elif isinstance(param.annotation, type):
